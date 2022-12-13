@@ -42,10 +42,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'scrum_board.urls'
 
+TEMPLATES_DIR = BASE_DIR / 'templates'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATES_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -99,6 +101,10 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static_dev'
+]
+STATIC_ROOT = BASE_DIR / 'static'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
