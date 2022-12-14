@@ -17,7 +17,6 @@ class CustomUserTests(TestCase):
             username='test',
             password='123',
             email='test@test.ru',
-            status='DEVELOPER',
         )
         test_user.full_clean()
         test_user.save()
@@ -31,7 +30,6 @@ class CustomUserTests(TestCase):
             username='test',
             password='123',
             email='test@test.ru',
-            status='DEVELOPER',
         )
         test_user.full_clean()
         test_user.save()
@@ -41,7 +39,6 @@ class CustomUserTests(TestCase):
                 username='test',
                 password='123',
                 email='test_2@test.ru',
-                status='DEVELOPER',
             )
             test_user_2.full_clean()
             test_user_2.save()
@@ -55,7 +52,6 @@ class CustomUserTests(TestCase):
             username='test',
             password='123',
             email='test@test.ru',
-            status='DEVELOPER',
         )
         test_user.full_clean()
         test_user.save()
@@ -65,7 +61,6 @@ class CustomUserTests(TestCase):
                 username='test_2',
                 password='123',
                 email='test@test.ru',
-                status='DEVELOPER',
             )
             test_user_2.full_clean()
             test_user_2.save()
