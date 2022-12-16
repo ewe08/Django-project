@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <div class="text-center" style="background-image: url({% static 'img/todo.png' %}); background-size: contain; height: 80vh; background-repeat: no-repeat">
+        <h2>Добро пожаловать на сайт To Do. Здесь вы сможете контролировать свои задачи.</h2>
+        <br>
+        <a type="button" class="btn btn-success btn-lg" href="">Создать задачу</a>
+    </div>
+{% endblock %}
