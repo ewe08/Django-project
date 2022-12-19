@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class='row'>
+
+<div class='backlog col-2'>
+    <div class="">
+      Бэклог
+    </div>
+  {% for task in backlog %}
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Задание для {{ task.executor }}</h5>
+          <p class="card-text">{{ task.text }}</p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+
+  {% endfor %}
+</div>
+
+<div class='todo col-2'>
+    <div class="">
+      Сделать
+    </div>
+  {% for task in todo %}
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Задание для {{ task.executor }}</h5>
+        <p class="card-text">{{ task.text }}</p>
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<div class='progress col-2'>
+  <div>
+    В процессе
+  </div>
+{% for task in progress %}
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Задание для {{ task.executor }}</h5>
+      <p class="card-text">{{ task.text }}</p>
+      <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a>
+    </div>
+  </div>
+{% endfor %}
+</div>
+
+<div class='test col-2'>
+  <div class="">
+    Тестируется
+  </div>
+{% for task in test %}
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Задание для {{ task.executor }}</h5>
+      <p class="card-text">{{ task.text }}</p>
+      <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a>
+    </div>
+  </div>
+{% endfor %}
+</div>
+
+<div class='done col-2'>
+  <div class="">
+    Готово
+  </div>
+{% for task in done %}
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">Задание для {{ task.executor }}</h5>
+      <p class="card-text">{{ task.text }}</p>
+      <a href="#" class="card-link">Card link</a>
+      <a href="#" class="card-link">Another link</a>
+    </div>
+  </div>
+{% endfor %}
+</div>
+
+</div>
+
+
+{% endblock %}
