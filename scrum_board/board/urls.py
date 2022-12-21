@@ -2,11 +2,12 @@ from django.urls import path
 
 from . import views
 
-app_name = 'catalog'
+app_name = 'board'
 
 urlpatterns = [
-    path('',
-         views.TasksView.as_view(),
-         name='tasks'
-         ),
+    path(
+        '<int:pk>',
+        views.BoardsView.as_view(),
+        name='tasks'
+    ),
 ]

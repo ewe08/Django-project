@@ -1,25 +1,44 @@
-from django.views.generic import TemplateView
+from django.shortcuts import get_object_or_404
+from django.views.generic import DetailView
 
-from .models import Task
+from .models import Board
 
 
-class TasksView(TemplateView):
+class BoardsView(DetailView):
     """
     View class for display scrum board
     render tasks.html
     """
+    model = Board
     template_name = 'board/board.html'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(
+            Board,
+            pk=self.kwargs['pk'],
+        )
 
     def get_context_data(self, **kwargs):
         """
         :return: context with item
         """
         context = super().get_context_data()
+        board = self.get_object()
         context['title'] = 'Подробнее'
-        context['backlog'] = Task.objects.filter(status='Бэклог')
-        context['todo'] = Task.objects.filter(status='Сделать')
-        context['progress'] = Task.objects.filter(status='В процессе')
-        context['test'] = Task.objects.filter(status='Тестируется')
-        context['done'] = Task.objects.filter(status='Готово')
+        context['backlog'] = board.tasks.filter(
+            status='Бэклог'
+        )
+        context['todo'] = board.tasks.filter(
+            status='Сделать'
+        )
+        context['progress'] = board.tasks.filter(
+            status='В процессе'
+        )
+        context['test'] = board.tasks.filter(
+            status='Тестируется'
+        )
+        context['done'] = board.tasks.filter(
+            status='Готово'
+        )
 
         return context

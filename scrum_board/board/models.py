@@ -61,3 +61,35 @@ class Task(models.Model):
 
     def __str__(self):
         return self.text
+
+
+class Board(models.Model):
+    """
+    A board where tasks of several users are stored
+    """
+    creator = models.ForeignKey(
+        CustomUser,
+        verbose_name='создатель',
+        on_delete=models.CASCADE,
+        help_text='Создатель задачи.',
+        related_name='creator_board',
+    )
+
+    executors = models.ManyToManyField(
+        CustomUser,
+        verbose_name='исполнители',
+        help_text='Участтники доски.',
+    )
+
+    tasks = models.ManyToManyField(
+        Task,
+        verbose_name='задачи',
+        help_text='Задачи определенной доски.',
+    )
+
+    class Meta:
+        verbose_name = 'доска'
+        verbose_name_plural = 'доски'
+
+    def __str__(self):
+        return f'Доска {self.creator} #{self.pk}'
