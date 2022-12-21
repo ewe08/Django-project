@@ -1,9 +1,10 @@
 from django.contrib.auth.forms import UserChangeForm
 
 from .models import CustomUser
+from core.forms import BaseForm
 
 
-class CustomUserChangeForm(UserChangeForm):
+class CustomUserChangeForm(BaseForm, UserChangeForm):
     password = None
 
     class Meta:
