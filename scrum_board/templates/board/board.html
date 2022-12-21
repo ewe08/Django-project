@@ -6,84 +6,50 @@
 
 <div class='row'>
 
-<div class='backlog col-2'>
-    <div class="">
+<div class="backlog col-2">
+    <div class="font-weight-bold">
       Бэклог
     </div>
   {% for task in backlog %}
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Задание для {{ task.executor }}</h5>
-          <p class="card-text">{{ task.text }}</p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-        </div>
-      </div>
-
+    {% include "includes/card.html" %}
   {% endfor %}
 </div>
 
-<div class='todo col-2'>
-    <div class="">
+<div class="todo col-2">
+    <div class="font-weight-bold">
       Сделать
     </div>
   {% for task in todo %}
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Задание для {{ task.executor }}</h5>
-        <p class="card-text">{{ task.text }}</p>
-        <a href="#" class="card-link">Card link</a>
-        <a href="#" class="card-link">Another link</a>
-      </div>
-    </div>
+    {% include "includes/card.html" %}
   {% endfor %}
 </div>
 
-<div class='progress col-2'>
-  <div>
+<div class="progress col-2">
+  <div class="font-weight-bold">
     В процессе
   </div>
 {% for task in progress %}
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Задание для {{ task.executor }}</h5>
-      <p class="card-text">{{ task.text }}</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div>
+  {% include "includes/card.html" %}
+
 {% endfor %}
 </div>
 
-<div class='test col-2'>
-  <div class="">
+<div class="test col-2">
+  <div class="font-weight-bold">
     Тестируется
   </div>
 {% for task in test %}
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Задание для {{ task.executor }}</h5>
-      <p class="card-text">{{ task.text }}</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div>
+  {% include "includes/card.html" %}
+
 {% endfor %}
 </div>
 
-<div class='done col-2'>
-  <div class="">
+<div class="done col-2">
+  <div class="font-weight-bold">
     Готово
   </div>
 {% for task in done %}
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Задание для {{ task.executor }}</h5>
-      <p class="card-text">{{ task.text }}</p>
-      <a href="#" class="card-link">Card link</a>
-      <a href="#" class="card-link">Another link</a>
-    </div>
-  </div>
+  {% include "includes/card.html" %}
 {% endfor %}
 </div>
 
