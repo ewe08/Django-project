@@ -9,6 +9,7 @@ env = environ.Env(
     SECRET_KEY=(str, 'dummy-key'),
     ALLOWED_HOSTS=(list, ['*']),
     INTERNAL_IPS=(list, []),
+    DEFAULT_FROM_EMAIL=(str, 'scrum_board@support.com')
 )
 
 env.read_env(BASE_DIR / '.env')
@@ -30,6 +31,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'board.apps.BoardConfig',
     'homepage.apps.HomepageConfig',
+    'feedback.apps.FeedbackConfig'
 ]
 
 MIDDLEWARE = [
@@ -64,14 +66,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'scrum_board.wsgi.application'
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -107,6 +107,10 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static_dev'
 ]
 STATIC_ROOT = BASE_DIR / 'static'
+
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = BASE_DIR / 'send_mail'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
