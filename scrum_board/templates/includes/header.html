@@ -6,37 +6,34 @@
             <div class="container">
                 <nav class="nav nav-pills nav-justified">
                     <a class="navbar-brand" href="{% url 'homepage:home' %}">
-                        <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
+                        <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top"
+                             alt="">
                         To Do
                     </a>
                     <ul class="navbar-nav">
-                        {% with request.resolver_match.view_name as view_name %}
-                            {% if view_name == 'board:boards' %}
-                                <li class="nav-item active">
-                                    <a class="nav-link" href="{% url 'board:boards' %}">Задачи</a>
-                                </li>
-                            {% else %}
-                                <li class="nav-item ">
-                                    <a class="nav-link" href="{% url 'board:boards' %}">Задачи</a>
-                                </li>
-                            {% endif %}
-                            {% endwith %}
-
+                        <li class="nav-item">
+                            <a class="{% if view_name == 'board:boards' %}btn btn-success{% else %}nav-link{% endif %}"
+                               href="{% url 'board:boards' %}">Доски</a>
+                        </li>
+                        <a class="{% if view_name == 'board:create_board' %}btn btn-success{% else %}nav-link{% endif %}"
+                           href="{% url 'board:create_board' %}">Создать доску</a>
                     </ul>
                 </nav>
                 <nav class="nav nav-pills nav-justified">
                     {% if user and user.is_authenticated %}
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ request.user.username }}</button>
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">{{ request.user.username }}</button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{% url 'users:profile' user.pk %}">Мой профиль</a></li>
+                                <li><a class="dropdown-item" href="{% url 'users:profile' user.pk %}">Мой профиль</a>
+                                </li>
                             </ul>
                         </div>
                     {% else %}
-                        <div class="d-flex login">
-                            <a class="btn btn-outline-success" href={% url 'users:signup' %}>Зарегистрироваться</a>
-                            <a class="btn btn-outline-success" href={% url 'users:login' %}>Войти</a>
-                        </div>
+                        <a class="{% if view_name == 'users:login' %}nav-item nav-link active {% else %} nav-item nav-link {% endif %}"
+                           href="">Вход</a>
+                        <a class="{% if view_name == 'users:singup' %}nav-item nav-link active {% else %} nav-item nav-link {% endif %}"
+                           href="">Регистрация</a>
                     {% endif %}
                 </nav>
             </div>
