@@ -11,7 +11,7 @@
       Бэклог
     </div>
   {% for task in backlog %}
-    {% include "includes/card.html" %}
+    {% include "includes/task.html" %}
   {% endfor %}
 </div>
 
@@ -20,7 +20,7 @@
       Сделать
     </div>
   {% for task in todo %}
-    {% include "includes/card.html" %}
+    {% include "includes/task.html" %}
   {% endfor %}
 </div>
 
@@ -29,7 +29,7 @@
     В процессе
   </div>
 {% for task in progress %}
-  {% include "includes/card.html" %}
+  {% include "includes/task.html" %}
 
 {% endfor %}
 </div>
@@ -39,7 +39,7 @@
     Тестируется
   </div>
 {% for task in test %}
-  {% include "includes/card.html" %}
+  {% include "includes/task.html" %}
 
 {% endfor %}
 </div>
@@ -49,7 +49,7 @@
     Готово
   </div>
 {% for task in done %}
-  {% include "includes/card.html" %}
+  {% include "includes/task.html" %}
 {% endfor %}
 </div>
 

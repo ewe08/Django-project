@@ -6,8 +6,13 @@ app_name = 'board'
 
 urlpatterns = [
     path(
+        '',
+        views.BoardsListView.as_view(),
+        name='boards',
+    ),
+    path(
         '<int:pk>',
-        views.BoardsView.as_view(),
-        name='tasks'
+        views.BoardDetailView.as_view(),
+        name='tasks',
     ),
 ]

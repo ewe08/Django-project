@@ -1,5 +1,6 @@
 from django.db import models
 
+from .managers import BoardManager
 from users.models import CustomUser
 
 
@@ -29,6 +30,7 @@ class Task(models.Model):
         verbose_name='исполнитель',
         on_delete=models.SET_NULL,
         null=True,
+        blank=True,
         help_text='Исполнитель задачи.',
         related_name='executor_tasks',
     )
@@ -67,6 +69,12 @@ class Board(models.Model):
     """
     A board where tasks of several users are stored
     """
+    objects = BoardManager()
+    name = models.CharField(
+        max_length=30,
+        verbose_name='название',
+        help_text='Название доски.',
+    )
     creator = models.ForeignKey(
         CustomUser,
         verbose_name='создатель',

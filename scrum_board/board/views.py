@@ -1,18 +1,33 @@
 from django.shortcuts import get_object_or_404
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 
 from .models import Board
 
 
-class BoardsView(DetailView):
+class BoardsListView(ListView):
+    """
+    List of all boards for a specific user
+    render
+    """
+    model = Board
+    template_name = 'board/list.html'
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        user = self.request.user
+        context['boards'] = Board.objects.user_boards(user)
+        return context
+
+
+class BoardDetailView(DetailView):
     """
     View class for display scrum board
-    render tasks.html
+    render board/board.html
     """
     model = Board
     template_name = 'board/board.html'
 
-    def get_object(self, queryset=None):
+    def get_object(self):
         return get_object_or_404(
             Board,
             pk=self.kwargs['pk'],
