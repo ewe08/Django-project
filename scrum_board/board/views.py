@@ -42,7 +42,9 @@ class BoardDetailView(generic.DetailView):
         """
         context = super().get_context_data()
         board = self.get_object()
+        print(board.pk)
         context['title'] = 'Подробнее'
+        context['board'] = board.pk
         context['backlog'] = board.tasks.filter(
             status='Бэклог'
         )
@@ -58,22 +60,26 @@ class BoardDetailView(generic.DetailView):
         context['done'] = board.tasks.filter(
             status='Готово'
         )
+        return context
 
 
 class TaskCreateView(generic.FormView):
     """Form for creating a task"""
     template_name = 'board/create_task.html'
     form_class = TaskForm
-    success_url = reverse_lazy('homepage:home')
 
     def form_valid(self, form):
-        Task.objects.create(
+        task = Task.objects.create(
             creator=self.request.user,
             **form.cleaned_data
         )
+        Board.objects.get(pk=self.kwargs['pk']).tasks.add(task)
         return super().form_valid(form)
 
-    def get_context_data(self, **kwargs):
+    def get_success_url(self):
+        return reverse_lazy('board:tasks', kwargs={'pk': self.kwargs['pk']})
+
+    def get_context_data(self):
         context = super().get_context_data()
         context['title'] = 'Создание задачи'
         return context

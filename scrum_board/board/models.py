@@ -41,11 +41,15 @@ class Task(models.Model):
     )
 
     start_date = models.DateTimeField(
+        null=True,
+        blank=True,
         verbose_name='начало',
         help_text='Дата начала выполнения задачи.',
     )
 
     end_date = models.DateTimeField(
+        null=True,
+        blank=True,
         verbose_name='конец',
         help_text='Дата дедлайна.',
     )

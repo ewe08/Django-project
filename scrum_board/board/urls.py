@@ -11,13 +11,13 @@ urlpatterns = [
         name='boards',
     ),
     path(
-        '<int:pk>',
+        '<int:pk>/',
         views.BoardDetailView.as_view(),
         name='tasks',
     ),
 
     path(
-        'create_task/',
+        '<int:pk>/create_task/',
         views.TaskCreateView.as_view(),
         name='create_task',
     ),

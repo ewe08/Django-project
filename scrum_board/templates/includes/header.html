@@ -9,8 +9,20 @@
                         <img src="{% static 'img/logo.png' %}" width="30" height="30" class="d-inline-block align-top" alt="">
                         To Do
                     </a>
-                    <a class="{% if view_name == 'catalog:item_list' %}nav-item nav-link active {% else %} nav-item nav-link {% endif %}" href="">Задачи</a>
-                    <a class="{% if view_name == 'about:description' %}nav-item nav-link active {% else %} nav-item nav-link {% endif %}" href="">Чаты</a>
+                    <ul class="navbar-nav">
+                        {% with request.resolver_match.view_name as view_name %}
+                            {% if view_name == 'board:boards' %}
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="{% url 'board:boards' %}">Задачи</a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item ">
+                                    <a class="nav-link" href="{% url 'board:boards' %}">Задачи</a>
+                                </li>
+                            {% endif %}
+                            {% endwith %}
+
+                    </ul>
                 </nav>
                 <nav class="nav nav-pills nav-justified">
                     {% if user and user.is_authenticated %}
