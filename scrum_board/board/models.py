@@ -79,24 +79,11 @@ class Board(models.Model):
         verbose_name='название',
         help_text='Название доски.',
     )
-    creator = models.ForeignKey(
-        CustomUser,
-        verbose_name='создатель',
-        on_delete=models.CASCADE,
-        help_text='Создатель задачи.',
-        related_name='creator_board',
-    )
 
     executors = models.ManyToManyField(
         CustomUser,
         verbose_name='исполнители',
-        help_text='Участтники доски.',
-    )
-
-    tasks = models.ManyToManyField(
-        Task,
-        verbose_name='задачи',
-        help_text='Задачи определенной доски.',
+        help_text='Участники доски.',
     )
 
     class Meta:
@@ -104,4 +91,4 @@ class Board(models.Model):
         verbose_name_plural = 'доски'
 
     def __str__(self):
-        return f'Доска {self.creator} #{self.pk}'
+        return f'Доска {self.name} #{self.pk}'
