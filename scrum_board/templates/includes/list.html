@@ -1,0 +1,20 @@
+<div class="cells">
+    {% for board in boards %}
+    <div class="card">
+        <div class="card-header">
+            <h4>{{ board }}</h4>
+        </div>
+        <div class="card-body">
+        <h5 class="card-title">Доска {{ board.creator }}</h5>
+        <p class="card-text">Участники:
+            {% for user in board.executors.all %}
+                {{ user.username }},
+            {% endfor %}
+        </p>
+        <a href="{% url 'board:tasks' board.pk %}" class="btn btn-success">
+            Посмотреть
+        </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>

@@ -17,7 +17,7 @@
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{ request.user.username }}</button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="">Мой профиль</a></li>
+                                <li><a class="dropdown-item" href="{% url 'users:profile' user.pk %}">Мой профиль</a></li>
                             </ul>
                         </div>
                     {% else %}

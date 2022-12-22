@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class='row'>
+
+<div class="backlog col-2">
+    <div class="font-weight-bold">
+      Бэклог
+    </div>
+  {% for task in backlog %}
+    {% include "includes/task.html" %}
+  {% endfor %}
+</div>
+
+<div class="todo col-2">
+    <div class="font-weight-bold">
+      Сделать
+    </div>
+  {% for task in todo %}
+    {% include "includes/task.html" %}
+  {% endfor %}
+</div>
+
+<div class="progress_task col-2">
+  <div class="font-weight-bold">
+    В процессе
+  </div>
+{% for task in progress %}
+  {% include "includes/task.html" %}
+
+{% endfor %}
+</div>
+
+<div class="test col-2">
+  <div class="font-weight-bold">
+    Тестируется
+  </div>
+{% for task in test %}
+  {% include "includes/task.html" %}
+
+{% endfor %}
+</div>
+
+<div class="done col-2">
+  <div class="font-weight-bold">
+    Готово
+  </div>
+{% for task in done %}
+  {% include "includes/task.html" %}
+{% endfor %}
+</div>
+
+</div>
+
+
+{% endblock %}
