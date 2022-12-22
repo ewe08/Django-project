@@ -15,4 +15,10 @@ urlpatterns = [
         views.BoardDetailView.as_view(),
         name='tasks',
     ),
+
+    path(
+        'create_task/',
+        views.TaskCreateView.as_view(),
+        name='create_task',
+    ),
 ]
