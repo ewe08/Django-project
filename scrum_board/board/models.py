@@ -1,5 +1,6 @@
 from django.db import models
 
+from .managers import BoardManager
 from users.models import CustomUser
 
 
@@ -29,6 +30,7 @@ class Task(models.Model):
         verbose_name='исполнитель',
         on_delete=models.SET_NULL,
         null=True,
+        blank=True,
         help_text='Исполнитель задачи.',
         related_name='executor_tasks',
     )
@@ -61,3 +63,41 @@ class Task(models.Model):
 
     def __str__(self):
         return self.text
+
+
+class Board(models.Model):
+    """
+    A board where tasks of several users are stored
+    """
+    objects = BoardManager()
+    name = models.CharField(
+        max_length=30,
+        verbose_name='название',
+        help_text='Название доски.',
+    )
+    creator = models.ForeignKey(
+        CustomUser,
+        verbose_name='создатель',
+        on_delete=models.CASCADE,
+        help_text='Создатель задачи.',
+        related_name='creator_board',
+    )
+
+    executors = models.ManyToManyField(
+        CustomUser,
+        verbose_name='исполнители',
+        help_text='Участтники доски.',
+    )
+
+    tasks = models.ManyToManyField(
+        Task,
+        verbose_name='задачи',
+        help_text='Задачи определенной доски.',
+    )
+
+    class Meta:
+        verbose_name = 'доска'
+        verbose_name_plural = 'доски'
+
+    def __str__(self):
+        return f'Доска {self.creator} #{self.pk}'

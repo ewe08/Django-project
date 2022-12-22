@@ -18,14 +18,11 @@
     <body>
         {% include "includes/header.html" %}
         <div class="container">
-            <br>
             <main>
                 {% block content %}{% endblock %}
             </main>
-            <br>
             {% include "includes/footer.html" %}
         </div>
     <script type="text/javascript" src="{% static 'js/bootstrap.bundle.js' %}"></script>
     </body>
 </html>
-
