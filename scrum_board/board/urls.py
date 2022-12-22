@@ -21,4 +21,9 @@ urlpatterns = [
         views.TaskCreateView.as_view(),
         name='create_task',
     ),
+    path(
+        'create_board/',
+        views.BoardCreateView.as_view(),
+        name='create_board'
+    )
 ]
