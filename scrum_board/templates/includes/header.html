@@ -31,9 +31,9 @@
                         </div>
                     {% else %}
                         <a class="{% if view_name == 'users:login' %}nav-item nav-link active {% else %} nav-item nav-link {% endif %}"
-                           href="">Вход</a>
+                           href="{% url 'users:login' %}">Вход</a>
                         <a class="{% if view_name == 'users:singup' %}nav-item nav-link active {% else %} nav-item nav-link {% endif %}"
-                           href="">Регистрация</a>
+                           href="{% url 'users:signup' %}">Регистрация</a>
                     {% endif %}
                 </nav>
             </div>

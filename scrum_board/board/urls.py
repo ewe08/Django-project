@@ -25,5 +25,16 @@ urlpatterns = [
         'create_board/',
         views.BoardCreateView.as_view(),
         name='create_board'
+    ),
+    path(
+        '<int:board_id>/<int:task_id>/next',
+        views.next,
+        name='next_state',
+    ),
+    path(
+        '<int:board_id>/<int:task_id>/last',
+        views.last,
+        name='last_state',
     )
+
 ]

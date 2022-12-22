@@ -12,6 +12,7 @@ class LoginView(views.LoginView):
     render login html.
     """
     template_name = 'users/login.html'
+    success_url = reverse_lazy('homepage:home')
 
     def get_context_data(self, **kwargs):
         context = super(LoginView, self).get_context_data(**kwargs)
@@ -191,28 +192,13 @@ class ProfileView(generic.edit.UpdateView):
     render profile html.
     """
     model = CustomUser
-    fields = ('first_name', 'last_name', 'email', 'birthday')
-    template_name = 'users/user_detail.html'
+    fields = ('first_name', 'last_name', 'email',)
+    template_name = 'users/profile.html'
 
     def get_context_data(self, **kwargs):
         context = super(
             ProfileView,
             self,
         ).get_context_data(**kwargs)
-        context['title'] = 'Ваш профиль'
-        return context
-
-
-class UsersList(generic.ListView):
-    """View class for users list page.
-
-    render users list html.
-    """
-    model = CustomUser
-    template_name = 'users/user_list.html'
-
-    def get_context_data(self, **kwargs):
-        context = {}
-        context['items'] = CustomUser.objects.all().filter(is_active=True)
         context['title'] = 'Ваш профиль'
         return context

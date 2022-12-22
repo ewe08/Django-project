@@ -4,7 +4,6 @@
     <h2>Создание доски</h2>
     <form method="post">
         {% csrf_token %}
-{#        {{ form.name }}#}
         <label for="{{ form.name.id_for_label }}"></label>
         <input type="text" class="form-control"
                maxlength="30" name="{{ form.name.name }}"

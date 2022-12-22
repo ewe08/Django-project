@@ -1,6 +1,6 @@
 from django.db import models
 
-from .managers import BoardManager
+from .managers import BoardManager, TaskManager
 from users.models import CustomUser
 
 
@@ -9,7 +9,7 @@ class Task(models.Model):
     The task that the user has set. Has a executor, creator,
     text, timeline and status.
     """
-
+    objects = TaskManager
     STATUS_CHOICES = (
         ('Бэклог', 'Бэклог'),
         ('Сделать', 'Сделать'),
@@ -79,11 +79,23 @@ class Board(models.Model):
         verbose_name='название',
         help_text='Название доски.',
     )
-
+    creator = models.ForeignKey(
+        CustomUser,
+        verbose_name='создатель',
+        on_delete=models.CASCADE,
+        help_text='Создатель доски.',
+        related_name='creator_board',
+    )
     executors = models.ManyToManyField(
         CustomUser,
         verbose_name='исполнители',
         help_text='Участники доски.',
+    )
+
+    tasks = models.ManyToManyField(
+        Task,
+        verbose_name='задачи',
+        help_text='Задачи определенной доски.',
     )
 
     class Meta:
