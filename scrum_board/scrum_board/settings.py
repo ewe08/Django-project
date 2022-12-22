@@ -9,6 +9,7 @@ env = environ.Env(
     SECRET_KEY=(str, 'dummy-key'),
     ALLOWED_HOSTS=(list, ['*']),
     INTERNAL_IPS=(list, []),
+    DEFAULT_FROM_EMAIL=(str, 'scrum_board@support.com')
 )
 
 env.read_env(BASE_DIR / '.env')
@@ -108,6 +109,8 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static_dev'
 ]
 STATIC_ROOT = BASE_DIR / 'static'
+
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 

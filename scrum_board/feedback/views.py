@@ -1,3 +1,4 @@
+from django.core.mail import send_mail
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import FormView
@@ -17,4 +18,7 @@ class FeedbackView(FormView):
     def form_valid(self, form: FeedbackForm):
         data = form.cleaned_data
         Feedback(user=self.request.user, text=data['text']).save()
+        send_mail("We have reviewed your feedback!",
+                  data['text'],
+                  )
         return redirect(reverse('homepage:home'))
