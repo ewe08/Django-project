@@ -87,4 +87,4 @@ class Board(models.Model):
         verbose_name_plural = 'доски'
 
     def __str__(self):
-        return f'Доска {self.creator} #{self.pk}'
+        return f'Доска {self.name} #{self.pk}'
