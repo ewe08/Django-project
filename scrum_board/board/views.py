@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
 
-from .forms import TaskForm
+from .forms import TaskForm, BoardCreateForm
 from .models import Board, Task
 
 
@@ -77,3 +77,14 @@ class TaskCreateView(generic.FormView):
         context = super().get_context_data()
         context['title'] = 'Создание задачи'
         return context
+
+
+class BoardCreateView(generic.FormView):
+    """Form for creating Board"""
+    template_name = 'board/create_board.html'
+    form_class = BoardCreateForm
+    success_url = reverse_lazy('homepage:home')
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)

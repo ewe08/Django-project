@@ -79,7 +79,7 @@ class Board(models.Model):
     executors = models.ManyToManyField(
         CustomUser,
         verbose_name='исполнители',
-        help_text='Участтники доски.',
+        help_text='Участники доски.',
     )
 
     class Meta:
