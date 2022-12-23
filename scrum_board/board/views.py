@@ -60,19 +60,20 @@ class BoardDetailView(UserPassesTestMixin, generic.DetailView):
         context['board'] = board.pk
         context['title'] = 'Подробнее'
         context['board'] = board.pk
-        context['backlog'] = board.tasks.filter(
+        tasks = board.tasks.all()
+        context['backlog'] = tasks.filter(
             status='Бэклог'
         )
-        context['todo'] = board.tasks.filter(
+        context['todo'] = tasks.filter(
             status='Сделать'
         )
-        context['progress'] = board.tasks.filter(
+        context['progress'] = tasks.filter(
             status='В процессе'
         )
-        context['test'] = board.tasks.filter(
+        context['test'] = tasks.filter(
             status='Тестируется'
         )
-        context['done'] = board.tasks.filter(
+        context['done'] = tasks.filter(
             status='Готово'
         )
         return context
