@@ -16,7 +16,7 @@ urlpatterns = [
         name='logout',
     ),
     path(
-      'password_change/done/',
+        'password_change/done/',
         views.PasswordChangeDoneView.as_view(),
         name='password_change_done',
     ),
