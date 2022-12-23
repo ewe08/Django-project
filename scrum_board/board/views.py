@@ -1,8 +1,8 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
-from django.shortcuts import redirect
 
 from .forms import TaskForm, BoardCreateForm
 from .models import Board, Task
@@ -100,11 +100,6 @@ class TaskCreateView(UserPassesTestMixin, generic.FormView):
 
     def get_success_url(self):
         return reverse_lazy('board:tasks', kwargs={'pk': self.kwargs['pk']})
-
-    def get_context_data(self):
-        context = super().get_context_data()
-        context['title'] = 'Создание задачи'
-        return context
 
 
 class BoardCreateView(UserPassesTestMixin, generic.FormView):
