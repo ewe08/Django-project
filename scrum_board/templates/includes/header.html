@@ -22,17 +22,19 @@
                 <nav class="nav nav-pills nav-justified">
                     {% if user and user.is_authenticated %}
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">{{ request.user.username }}</button>
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ request.user.username }}
+                            </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="{% url 'users:profile' user.pk %}">Мой профиль</a>
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'users:profile' user.pk %}">Мой профиль</a>
                                 </li>
                             </ul>
                         </div>
                     {% else %}
                         <a class="{% if view_name == 'users:login' %}nav-item nav-link active {% else %} nav-item nav-link {% endif %}"
                            href="{% url 'users:login' %}">Вход</a>
-                        <a class="{% if view_name == 'users:singup' %}nav-item nav-link active {% else %} nav-item nav-link {% endif %}"
+                        <a class="{% if view_name == 'users:signup' %}nav-item nav-link active {% else %} nav-item nav-link {% endif %}"
                            href="{% url 'users:signup' %}">Регистрация</a>
                     {% endif %}
                 </nav>

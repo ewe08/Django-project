@@ -5,15 +5,15 @@
             <h4>{{ board.name }}</h4>
         </div>
         <div class="card-body">
-        <h5 class="card-title">Доска {{ board.creator }}</h5>
-        <p class="card-text">Участники:
-            {% for user in board.executors.all %}
-                {{ user.username }},
-            {% endfor %}
-        </p>
-        <a href="{% url 'board:tasks' board.pk %}" class="btn btn-success">
-            Посмотреть
-        </a>
+            <h5 class="card-title">Доска {{ board.creator }}</h5>
+            <p class="card-text">Участники:
+                {% for user in board.executors.all %}
+                    {{ user.username }},
+                {% endfor %}
+            </p>
+            <a href="{% url 'board:tasks' board.pk %}" class="btn btn-success">
+                Посмотреть
+            </a>
         </div>
     </div>
     {% endfor %}

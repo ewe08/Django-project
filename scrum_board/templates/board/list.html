@@ -3,8 +3,8 @@
 {% load static %}
 
 {% block content %}
-
-<a type="button" class="btn btn-success btn-lg" href="{% url 'board:create_board' %}">Создать доску</a>
-
-{% include "includes/list.html" %}
+    <a type="button" class="btn btn-success btn-lg" href="{% url 'board:create_board' %}">Создать доску</a>
+    <br>
+    <br>
+    {% include "includes/list.html" %}
 {% endblock %}
