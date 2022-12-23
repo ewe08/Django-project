@@ -18,4 +18,4 @@ class BoardCreateForm(BaseForm, forms.ModelForm):
         exclude = (
             Board.name,
         )
-        fields = ['name', 'executors']
+        fields = ('name', 'executors', )
