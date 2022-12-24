@@ -35,6 +35,10 @@ urlpatterns = [
         '<int:board_id>/<int:task_id>/last',
         views.last,
         name='last_state',
+    ),
+    path(
+        '<int:board_id>/<int:task_id>/delete',
+        views.delete,
+        name='delete_task',
     )
-
 ]

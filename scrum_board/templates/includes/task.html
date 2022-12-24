@@ -1,8 +1,15 @@
 <div class="card">
     <div class="card-body">
+
       <h5 class="card-title">Задание для {{ task.executor }}</h5>
+
       <p class="card-text">{{ task.text }}</p>
       <a href="{% url 'board:last_state' board task.pk %}" class="btn btn-primary col-5" style="font-size:11px;">Назад</a>
       <a href="{% url 'board:next_state' board task.pk %}" class="btn btn-primary col-5" style="font-size:11px;">Дальше</a>
+
+      {% if user == task.creator %}
+        <a href="{% url 'board:delete_task' board task.pk %}" class="btn btn-danger" style="font-size:11px; margin-top:10px;">Удалить</a>
+      {% endif %}
+
     </div>
 </div>

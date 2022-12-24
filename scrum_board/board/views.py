@@ -127,7 +127,6 @@ class BoardCreateView(UserPassesTestMixin, generic.FormView):
 
 def next(requests, board_id, task_id):
     item = Task.objects.get(pk=task_id)
-    # item = item.objects.next()
     if item.status == 'Бэклог':
         item.status = 'Сделать'
     elif item.status == 'Сделать':
@@ -142,7 +141,6 @@ def next(requests, board_id, task_id):
 
 def last(requests, board_id, task_id):
     item = Task.objects.get(pk=task_id)
-    # item = item.objects.next()
     if item.status == 'Готово':
         item.status = 'Тестируется'
     elif item.status == 'Тестируется':
@@ -152,4 +150,10 @@ def last(requests, board_id, task_id):
     elif item.status == 'Сделать':
         item.status = 'Бэклог'
     item.save()
+    return redirect('board:tasks', pk=board_id)
+
+
+def delete(requests, board_id, task_id):
+    item = Task.objects.get(pk=task_id)
+    item.delete()
     return redirect('board:tasks', pk=board_id)
