@@ -17,8 +17,8 @@ class BoardsListView(UserPassesTestMixin, generic.ListView):
     template_name = 'board/list.html'
 
     def test_func(self):
-        return (self.request.user.is_authenticated and
-                self.request.user.is_active)
+        return (self.request.user.is_authenticated
+                and self.request.user.is_active)
 
     login_url = reverse_lazy('users:login')
 
@@ -40,8 +40,8 @@ class BoardDetailView(UserPassesTestMixin, generic.DetailView):
     template_name = 'board/board.html'
 
     def test_func(self):
-        return (self.request.user.is_authenticated and
-                self.request.user.is_active)
+        return (self.request.user.is_authenticated
+                and self.request.user.is_active)
 
     login_url = reverse_lazy('users:login')
 
@@ -85,8 +85,8 @@ class TaskCreateView(UserPassesTestMixin, generic.FormView):
     form_class = TaskForm
 
     def test_func(self):
-        return (self.request.user.is_authenticated and
-                self.request.user.is_active)
+        return (self.request.user.is_authenticated
+                and self.request.user.is_active)
 
     login_url = reverse_lazy('users:login')
 
@@ -109,8 +109,8 @@ class BoardCreateView(UserPassesTestMixin, generic.FormView):
     success_url = reverse_lazy('homepage:home')
 
     def test_func(self):
-        return (self.request.user.is_authenticated and
-                self.request.user.is_active)
+        return (self.request.user.is_authenticated
+                and self.request.user.is_active)
 
     login_url = reverse_lazy('users:login')
 
@@ -123,7 +123,6 @@ class BoardCreateView(UserPassesTestMixin, generic.FormView):
 
 def next(requests, board_id, task_id):
     item = Task.objects.get(pk=task_id)
-    # item = item.objects.next()
     if item.status == 'Бэклог':
         item.status = 'Сделать'
     elif item.status == 'Сделать':
@@ -138,7 +137,6 @@ def next(requests, board_id, task_id):
 
 def last(requests, board_id, task_id):
     item = Task.objects.get(pk=task_id)
-    # item = item.objects.next()
     if item.status == 'Готово':
         item.status = 'Тестируется'
     elif item.status == 'Тестируется':
