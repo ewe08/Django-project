@@ -18,7 +18,7 @@ class FeedbackView(FormView):
     def form_valid(self, form: FeedbackForm):
         data = form.cleaned_data
         Feedback(user=self.request.user, text=data['text']).save()
-        send_mail("We have reciewed your feedback!",
+        send_mail('We have reciewed your feedback!',
                   data['text'],
                   settings.DEFAULT_FROM_EMAIL,
                   [self.request.user.email])

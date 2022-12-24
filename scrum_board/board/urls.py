@@ -36,5 +36,4 @@ urlpatterns = [
         views.last,
         name='last_state',
     )
-
 ]
