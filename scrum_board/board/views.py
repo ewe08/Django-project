@@ -147,3 +147,9 @@ def last(requests, board_id, task_id):
         item.status = 'Бэклог'
     item.save()
     return redirect('board:tasks', pk=board_id)
+
+
+def delete(requests, board_id, task_id):
+    item = Task.objects.get(pk=task_id)
+    item.delete()
+    return redirect('board:tasks', pk=board_id)
