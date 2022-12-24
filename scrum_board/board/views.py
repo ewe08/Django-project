@@ -114,11 +114,20 @@ class BoardCreateView(UserPassesTestMixin, generic.FormView):
 
     login_url = reverse_lazy('users:login')
 
+    def get_context_data(self, **kwargs):
+        """
+        :return: context with title
+        """
+        context = super().get_context_data()
+        context['title'] = 'Создание доски'
+        return context
+
     def form_valid(self, form):
         board = form.save(commit=False)
         board.creator = self.request.user
         board.save()
-        return super().form_valid(form)
+        form.save_m2m()
+        return super(BoardCreateView, self).form_valid(form)
 
 
 def next(requests, board_id, task_id):
