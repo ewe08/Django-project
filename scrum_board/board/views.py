@@ -1,8 +1,8 @@
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
-from django.shortcuts import redirect
 
 from .forms import TaskForm, BoardCreateForm
 from .models import Board, Task
@@ -17,8 +17,8 @@ class BoardsListView(UserPassesTestMixin, generic.ListView):
     template_name = 'board/list.html'
 
     def test_func(self):
-        return (self.request.user.is_authenticated and
-                self.request.user.is_active)
+        return (self.request.user.is_authenticated
+                and self.request.user.is_active)
 
     login_url = reverse_lazy('users:login')
 
@@ -40,8 +40,8 @@ class BoardDetailView(UserPassesTestMixin, generic.DetailView):
     template_name = 'board/board.html'
 
     def test_func(self):
-        return (self.request.user.is_authenticated and
-                self.request.user.is_active)
+        return (self.request.user.is_authenticated
+                and self.request.user.is_active)
 
     login_url = reverse_lazy('users:login')
 
@@ -60,19 +60,20 @@ class BoardDetailView(UserPassesTestMixin, generic.DetailView):
         context['board'] = board.pk
         context['title'] = 'Подробнее'
         context['board'] = board.pk
-        context['backlog'] = board.tasks.filter(
+        tasks = board.tasks.all()
+        context['backlog'] = tasks.filter(
             status='Бэклог'
         )
-        context['todo'] = board.tasks.filter(
+        context['todo'] = tasks.filter(
             status='Сделать'
         )
-        context['progress'] = board.tasks.filter(
+        context['progress'] = tasks.filter(
             status='В процессе'
         )
-        context['test'] = board.tasks.filter(
+        context['test'] = tasks.filter(
             status='Тестируется'
         )
-        context['done'] = board.tasks.filter(
+        context['done'] = tasks.filter(
             status='Готово'
         )
         return context
@@ -84,8 +85,8 @@ class TaskCreateView(UserPassesTestMixin, generic.FormView):
     form_class = TaskForm
 
     def test_func(self):
-        return (self.request.user.is_authenticated and
-                self.request.user.is_active)
+        return (self.request.user.is_authenticated
+                and self.request.user.is_active)
 
     login_url = reverse_lazy('users:login')
 
@@ -100,11 +101,6 @@ class TaskCreateView(UserPassesTestMixin, generic.FormView):
     def get_success_url(self):
         return reverse_lazy('board:tasks', kwargs={'pk': self.kwargs['pk']})
 
-    def get_context_data(self):
-        context = super().get_context_data()
-        context['title'] = 'Создание задачи'
-        return context
-
 
 class BoardCreateView(UserPassesTestMixin, generic.FormView):
     """Form for creating Board"""
@@ -113,8 +109,8 @@ class BoardCreateView(UserPassesTestMixin, generic.FormView):
     success_url = reverse_lazy('homepage:home')
 
     def test_func(self):
-        return (self.request.user.is_authenticated and
-                self.request.user.is_active)
+        return (self.request.user.is_authenticated
+                and self.request.user.is_active)
 
     login_url = reverse_lazy('users:login')
 

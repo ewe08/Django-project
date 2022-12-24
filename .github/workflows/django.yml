@@ -27,4 +27,5 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       run: |
-        python scrum_board/manage.py test
+        cd scrum_board
+        python manage.py test

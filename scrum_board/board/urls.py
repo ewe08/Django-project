@@ -18,8 +18,10 @@ urlpatterns = [
 
     path(
         '<int:pk>/create_task/',
-        views.TaskCreateView.as_view(),
-        name='create_task',
+        views.TaskCreateView.as_view(
+            extra_context={'title': 'Создание задачи'}
+        ),
+        name='create_task'
     ),
     path(
         'create_board/',
